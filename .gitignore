@@ -1,0 +1,6 @@
+/bin
+/include
+*.test
+*.md
+/go.sum
+/data.bin

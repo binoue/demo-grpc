@@ -1,0 +1,26 @@
+syntax = "proto3";
+package timereport;
+
+import "google/protobuf/duration.proto";
+import "google/protobuf/timestamp.proto";
+
+message ReportRequest {
+    google.protobuf.Duration interval = 1;
+
+    enum TimeFormat {
+        RFC3339 = 0;
+        RFC822 = 1;
+        KITCHEN = 2;
+    }
+    TimeFormat format = 2;
+}
+
+message ReportResponse {
+    string message = 1;
+    google.protobuf.Timestamp timestamp = 2;
+}
+
+service TimeService {
+    // Stream the time report.
+    rpc Report(ReportRequest) returns (stream ReportResponse);
+}
